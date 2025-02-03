@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ArtilleryPiece" load_steps=3 format=3 uid="uid://c0g70o45nje2c"]
+
+[ext_resource type="Script" path="res://Script/resources/artillery_piece.gd" id="1_5khaj"]
+[ext_resource type="Resource" uid="uid://c2ey6so27yfmo" path="res://Resources/shells/HE_53_WOF_27.tres" id="2_v6uof"]
+
+[resource]
+script = ExtResource("1_5khaj")
+name = "2S3M1"
+shells = [ExtResource("2_v6uof")]
+charges = {
+0: 0.256,
+1: 0.298,
+2: 0.346,
+3: 0.4,
+4: 0.47,
+5: 0.54,
+6: 0.634
+}
+minAngle = 0.0
+maxAngle = 66.5
