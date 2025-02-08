@@ -36,14 +36,22 @@ func _on_calculate_pressed() -> void:
 
 func get_solutions() -> void:
 	var solutions = []
+	var distance = int(%Distance.text) + %Target.current_ot_adjustment #
+	var elevation = int(%Elevation.text)
+
+	var result = Arty.caculate_lr_shift(distance, %Target.current_lr_adjustment)
+	distance = result[0]
+	var azimuth = result[1]
+
 	for charge in self.active_piece.charges:
 		var new_solutions = Arty.solve_firing_solutions(
-			int(%Distance.text) + %Target.current_ot_adjustment,
+			distance,
 			self.active_shell.base_velocity * self.active_piece.charges[charge],
-			int(%Elevation.text)
+			elevation
 		)
 		for solution in new_solutions:
 			solution.charge = charge
+			solution.azimuth_correction = azimuth
 			solutions.append(solution)
 
 	solutions = solutions.filter(filter_solution)

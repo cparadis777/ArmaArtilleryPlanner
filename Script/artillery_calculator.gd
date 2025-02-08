@@ -51,10 +51,31 @@ func solve_firing_solutions(distance: float, muzzle_velocity: float, elevation_d
 	return solutions
 
 
-#167.7
-#195.2
-#226.6
-#262.0
-#307.9
-#353.7
-#415.3
+func caculate_lr_shift(distance:int, adjustment:int) -> Array:
+
+	#  r = radius
+	#  dtetha = azimuth change
+	#  dT = change along the tangent
+	#  dr = change in range 
+	#  
+	#
+	#  dtetha = arctan ( dt / r)
+	#  dr = dt/sin(dtetha)
+	#
+	#  with dtetha and (r+dr), we can calculate the new solution
+
+	if adjustment == 0:
+		return [distance, 0]
+
+	distance = float(distance)
+	adjustment = float(adjustment)
+
+
+	var azimuth_change = atan2(adjustment, distance)
+	
+	var distance_adjustment = (adjustment / sin(azimuth_change))
+	var new_distance = distance_adjustment + distance
+	return [int(new_distance), rad_to_deg(azimuth_change)]
+
+
+

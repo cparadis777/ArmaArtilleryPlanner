@@ -4,10 +4,10 @@
 
 [node name="SolutionRow" type="HBoxContainer"]
 anchors_preset = -1
-anchor_right = 0.256
-anchor_bottom = 0.035
-offset_right = -294.912
-offset_bottom = -22.68
+anchor_right = 0.358
+anchor_bottom = 0.04
+offset_right = -412.416
+offset_bottom = -25.92
 script = ExtResource("1_wy7o1")
 
 [node name="Type" type="Label" parent="."]
@@ -32,6 +32,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ToF" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="dAz" type="Label" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2

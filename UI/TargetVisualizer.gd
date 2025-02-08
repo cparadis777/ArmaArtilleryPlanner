@@ -40,4 +40,4 @@ func _on_adj_text_changed(_text:String) -> void:
 	if %LRAdj.text.is_valid_int() and %OTAdj.text.is_valid_int():
 		self.current_lr_adjustment = int(%LRAdj.text)
 		self.current_ot_adjustment = int(%OTAdj.text)
-		self.update_marker(Vector2(self.current_lr_adjustment, self.current_ot_adjustment))
+		self.update_marker(Vector2(self.current_lr_adjustment, -self.current_ot_adjustment))
