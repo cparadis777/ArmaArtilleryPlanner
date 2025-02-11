@@ -13,6 +13,13 @@ func _ready() -> void:
 		%PieceSelect.add_item(piece.name)
 	%PieceSelect.select(0)
 	self.active_piece = self.pieces[0]
+	Arty.simulate_shot(
+		self.active_shell.base_velocity * self.active_piece.charges[3], 
+			PI/4, 
+			int(%Elevation.text), 
+			self.active_shell.air_friction
+	)
+
 
 func set_active_piece(piece:ArtilleryPiece) -> void:
 	active_piece = piece
@@ -44,13 +51,20 @@ func get_solutions() -> void:
 	var azimuth = result[1]
 
 	for charge in self.active_piece.charges:
+		#var new_solutions = Arty.solve_firing_solutions(
+		#	distance,
+		#	self.active_shell.base_velocity * self.active_piece.charges[charge],
+		#	elevation
+		#)
 		var new_solutions = Arty.solve_firing_solutions(
 			distance,
-			self.active_shell.base_velocity * self.active_piece.charges[charge],
-			elevation
+			elevation,
+			self.active_piece,
+			self.active_shell,
+			charge
 		)
+
 		for solution in new_solutions:
-			solution.charge = charge
 			solution.azimuth_correction = azimuth
 			solutions.append(solution)
 
@@ -59,10 +73,13 @@ func get_solutions() -> void:
 
 func filter_solution(solution:firing_solution) -> bool:
 
-	if solution.elevation > self.active_piece.maxAngle:
+	var elevation = solution.elevation
+	elevation = Arty.nMil_to_deg(elevation)
+
+	if elevation > self.active_piece.maxAngle:
 		return false
-	if solution.elevation < self.active_piece.minAngle:
+	if elevation < self.active_piece.minAngle:
 		return false
-	if solution.tof < 10:
+	if solution.tof < 2:
 		return false
 	return true

@@ -6,4 +6,4 @@
 script = ExtResource("1_0crm0")
 name = "HE 53 WOF 27"
 base_velocity = 655
-air_friction = 0
+air_friction = -6e-05

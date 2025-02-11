@@ -6,3 +6,5 @@ var elevation:float
 var tof:float
 var type:String
 var azimuth_correction:float
+var error:float
+
