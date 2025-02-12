@@ -3,8 +3,9 @@ extends Node
 var GRAVITY:float = 9.8066
 var TIMESTEP:float = 0.05
 var EPSILON:int = 10
-var MAX_ITERATIONS:int = 1500
-var ANGLE_STEP:float = 0.001
+var MAX_ITERATIONS:int = 50
+var ANGLE_EPSILON:float = deg_to_rad(0.02)
+
 
 func calculate_projectile_motion(initial_velocity: float, initial_angle: float) -> Dictionary:
 	var angle_radians = deg_to_rad(initial_angle)
@@ -65,43 +66,106 @@ func nMil_to_deg(nMil:float) -> float:
 
 # 	return solutions
 
-func solve_firing_solutions(distance:int, elevation_difference:int, piece:ArtilleryPiece, ammo:ArtilleryShell, charge:int) -> Array:
-	var current_angle:float = deg_to_rad(piece.minAngle)
+func solve_firing_solutions(distance:int, elevation_difference:int, piece:ArtilleryPiece, ammo:ArtilleryShell) -> Array:
 	var n_iter = 0
 	var solutions = []
-	var max_angle = deg_to_rad(piece.maxAngle)
-
-	while n_iter < MAX_ITERATIONS and current_angle < max_angle:
-		var result = simulate_shot(ammo.base_velocity * piece.charges[charge], 
-			current_angle, 
-			elevation_difference, 
-			ammo.air_friction)
-		
-		var error = abs(result[0] - distance)
-		#if n_iter % 10 == 0:
-		#	print("Iteration: %s, Charge: %s, Angle: %.2f, Distance: %.2f,  ToF: %.2f,  Error: %.2f" % [n_iter, charge, rad_to_nMil(current_angle), result[0], result[1], error])
-		
-		if  abs(result[0] - distance) < EPSILON:
-			var new_solution = firing_solution.new()
-			new_solution.elevation = rad_to_nMil(current_angle)
-			new_solution.tof = result[1]
-			new_solution.type = "High" if rad_to_deg(current_angle) >= 45 else "Low"
-			new_solution.error = error
-			new_solution.charge = charge
-			solutions.append(new_solution)
-		current_angle += ANGLE_STEP
-		n_iter += 1
-	
-	var solution_families = { "High":[], "Low":[] }
-	for solution in solutions:
-		solution_families[solution.type].append(solution)
+	for charge in piece.charges.keys():
+		solutions.append(find_solution(distance, elevation_difference, piece, ammo, charge, "high"))
+		solutions.append(find_solution(distance, elevation_difference, piece, ammo, charge, "low"))
 
 	var selected_solutions = []
-	if solution_families['High'].size() != 0:
-		selected_solutions.append(select_solution(solution_families['High']))
-	if solution_families['Low'].size() != 0:
-		selected_solutions.append(select_solution(solution_families['Low']))
+
+
+	for solution in solutions:
+		#solution.display()
+		solution.display()
+		print(abs(solution.error) <= EPSILON)
+		if abs(solution.error) <= EPSILON and solution.tof > 2:
+
+			selected_solutions.append(solution)
+
+
 	return selected_solutions
+
+
+func find_solution(distance:int, elevation_difference:int, piece:ArtilleryPiece, ammo:ArtilleryShell, charge:int, type:String) -> firing_solution:
+	var max_angle = 0
+	var min_angle = 0
+	var current_best_solution = firing_solution.new()
+	current_best_solution.error = 1000
+	var n_iter = 0
+
+	match type:
+		"high":
+			max_angle = deg_to_rad(piece.maxAngle)
+			min_angle = deg_to_rad(45)
+		"low":
+			max_angle = deg_to_rad(45)
+			min_angle = deg_to_rad(piece.minAngle)
+
+	var current_angle:float = (min_angle + max_angle) / 2
+
+	while n_iter < MAX_ITERATIONS:
+		#if n_iter % 10 == 0:
+		#	print("Iteration: %s, Charge: %s, Type: %s" % [n_iter, charge, type])
+		
+		var result = simulate_shot(ammo.base_velocity * piece.charges[charge], 
+									current_angle, 
+									elevation_difference, 
+									ammo.air_friction)
+		
+
+		var error = result[0] - distance
+
+		result.append(current_angle)
+		result.append(error)
+		result.append(charge)
+
+		#if n_iter % 10 == 0:
+		#	print(result)
+
+		var solution = create_solution(result)
+
+
+		if abs(solution.error) < abs(current_best_solution.error):
+			current_best_solution = solution
+
+		if abs(max_angle - min_angle) < ANGLE_EPSILON:
+			break
+		if abs(current_best_solution.error) < EPSILON:
+			break
+	
+		match type:
+			"high":
+				if solution.error < 0:
+					max_angle = current_angle
+				else:
+					min_angle = current_angle
+
+			"low":
+				if solution.error < 0:
+					min_angle = current_angle
+				else:
+					max_angle = current_angle
+		
+		current_angle = (min_angle + max_angle) / 2
+
+		#if n_iter % 4 == 0:
+		#	print('M:%.2f, m:%.2f, c:%.2f' % [rad_to_deg(max_angle), rad_to_deg(min_angle), rad_to_deg(current_angle)])
+		n_iter += 1
+
+	#current_best_solution.display()
+	return current_best_solution
+
+
+func create_solution(param:Array) -> firing_solution:
+		var new_solution = firing_solution.new()
+		new_solution.elevation = round(rad_to_nMil(param[2]))
+		new_solution.tof = param[1]
+		new_solution.type = "High" if rad_to_deg(param[2]) > 45 else "Low"
+		new_solution.error = param[3]
+		new_solution.charge = param[4]
+		return new_solution
 
 
 func select_solution(solutions:Array) -> firing_solution:
@@ -161,3 +225,7 @@ func simulate_shot(initial_velocity:float, initial_angle:float, target_elevation
 		return [0, 0]
 	
 	return [position.x, time]
+
+
+#if n_iter % 10 == 0:
+#	print("Iteration: %s, Charge: %s, Angle: %.2f, Distance: %.2f,  ToF: %.2f,  Error: %.2f" % [n_iter, charge, rad_to_nMil(current_angle), result[0], result[1], error])

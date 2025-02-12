@@ -50,36 +50,16 @@ func get_solutions() -> void:
 	distance = result[0]
 	var azimuth = result[1]
 
-	for charge in self.active_piece.charges:
-		#var new_solutions = Arty.solve_firing_solutions(
-		#	distance,
-		#	self.active_shell.base_velocity * self.active_piece.charges[charge],
-		#	elevation
-		#)
-		var new_solutions = Arty.solve_firing_solutions(
-			distance,
-			elevation,
-			self.active_piece,
-			self.active_shell,
-			charge
-		)
 
-		for solution in new_solutions:
-			solution.azimuth_correction = azimuth
-			solutions.append(solution)
+	var new_solutions = Arty.solve_firing_solutions(
+		distance,
+		elevation,
+		self.active_piece,
+		self.active_shell
+	)
 
-	solutions = solutions.filter(filter_solution)
+	for solution in new_solutions:
+		solution.azimuth_correction = azimuth
+		solutions.append(solution)
+
 	%SolutionsTable.load_solutions(solutions)
-
-func filter_solution(solution:firing_solution) -> bool:
-
-	var elevation = solution.elevation
-	elevation = Arty.nMil_to_deg(elevation)
-
-	if elevation > self.active_piece.maxAngle:
-		return false
-	if elevation < self.active_piece.minAngle:
-		return false
-	if solution.tof < 2:
-		return false
-	return true
