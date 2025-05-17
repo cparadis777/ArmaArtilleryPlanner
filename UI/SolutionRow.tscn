@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ka5ai8xh4g83"]
 
-[ext_resource type="Script" path="res://UI/solution_row.gd" id="1_wy7o1"]
+[ext_resource type="Script" uid="uid://gfrv27myl6yt" path="res://UI/solution_row.gd" id="1_wy7o1"]
 
 [node name="SolutionRow" type="HBoxContainer"]
 anchors_preset = -1

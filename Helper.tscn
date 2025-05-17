@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://kfejqkxncrw"]
 
-[ext_resource type="Script" path="res://Script/helper.gd" id="1_6w3pj"]
+[ext_resource type="Script" uid="uid://b1vwtaujanmco" path="res://Script/helper.gd" id="1_6w3pj"]
 [ext_resource type="Resource" uid="uid://c0g70o45nje2c" path="res://Resources/pieces/2S3M1.tres" id="2_nok61"]
 
 [node name="Helper" type="Node"]

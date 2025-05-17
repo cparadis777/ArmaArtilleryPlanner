@@ -1,11 +1,11 @@
 extends Control
 
 
-@export var pieces:Array[ArtilleryPiece]
+@export var pieces: Array[ArtilleryPiece]
 
 
-var active_piece:ArtilleryPiece : set = set_active_piece
-var active_shell:ArtilleryShell
+var active_piece: ArtilleryPiece: set = set_active_piece
+var active_shell: ArtilleryShell
 
 func _ready() -> void:
 	%PieceSelect.clear()
@@ -14,14 +14,14 @@ func _ready() -> void:
 	%PieceSelect.select(0)
 	self.active_piece = self.pieces[0]
 	Arty.simulate_shot(
-		self.active_shell.base_velocity * self.active_piece.charges[3], 
-			PI/4, 
-			int(%Elevation.text), 
+		self.active_shell.base_velocity * self.active_piece.charges[3],
+			PI / 4,
+			int(%Elevation.text),
 			self.active_shell.air_friction
 	)
 
 
-func set_active_piece(piece:ArtilleryPiece) -> void:
+func set_active_piece(piece: ArtilleryPiece) -> void:
 	active_piece = piece
 	%AmmoSelect.clear()
 	for shell in piece.shells:
@@ -30,10 +30,10 @@ func set_active_piece(piece:ArtilleryPiece) -> void:
 	self.active_shell = piece.shells[0]
 
 
-func _on_piece_select_item_selected(index:int) -> void:
+func _on_piece_select_item_selected(index: int) -> void:
 	self.active_piece = self.pieces[index]
 
-func _on_ammo_select_item_selected(index:int) -> void:
+func _on_ammo_select_item_selected(index: int) -> void:
 	self.active_shell = self.active_piece.shells[index]
 
 func _on_calculate_pressed() -> void:
@@ -44,7 +44,7 @@ func _on_calculate_pressed() -> void:
 func get_solutions() -> void:
 	var solutions = []
 	var distance = int(%Distance.text) + %Target.current_ot_adjustment #
-	var elevation = int(%Elevation.text)
+	var elevation = int(%Elevation.text) - int(%BATTELEV.text)
 
 	var result = Arty.caculate_lr_shift(distance, %Target.current_lr_adjustment)
 	distance = result[0]

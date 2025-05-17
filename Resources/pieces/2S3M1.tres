@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ArtilleryPiece" load_steps=4 format=3 uid="uid://c0g70o45nje2c"]
 
-[ext_resource type="Script" path="res://Script/resources/artillery_piece.gd" id="1_5khaj"]
+[ext_resource type="Script" uid="uid://cmc6iqqnpi0r5" path="res://Script/resources/artillery_piece.gd" id="1_5khaj"]
 [ext_resource type="Resource" uid="uid://c2ey6so27yfmo" path="res://Resources/shells/HE_53_WOF_27.tres" id="2_v6uof"]
 [ext_resource type="Resource" uid="uid://bt4664ckavfa7" path="res://Resources/shells/HE_53_WOF_57(nofriction).tres" id="3_mdy46"]
 

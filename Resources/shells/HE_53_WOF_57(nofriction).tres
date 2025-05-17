@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ArtilleryShell" load_steps=2 format=3 uid="uid://bt4664ckavfa7"]
 
-[ext_resource type="Script" path="res://Script/resources/artillery_shell.gd" id="1_xrvx0"]
+[ext_resource type="Script" uid="uid://cj74pfh4y08uy" path="res://Script/resources/artillery_shell.gd" id="1_xrvx0"]
 
 [resource]
 script = ExtResource("1_xrvx0")

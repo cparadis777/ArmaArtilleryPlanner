@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d3qlum2yt1ahk"]
 
-[ext_resource type="Script" path="res://UI/Circle2D.gd" id="1_6h6tk"]
-[ext_resource type="Script" path="res://UI/TargetVisualizer.gd" id="1_vvqqt"]
+[ext_resource type="Script" uid="uid://bo10jt2exk4pq" path="res://UI/Circle2D.gd" id="1_6h6tk"]
+[ext_resource type="Script" uid="uid://dx3m4pikjihdy" path="res://UI/TargetVisualizer.gd" id="1_vvqqt"]
 [ext_resource type="PackedScene" uid="uid://b75k8vaxtfhh6" path="res://UI/reticle.tscn" id="3_1uxxo"]
 
 [node name="Target" type="MarginContainer"]
