@@ -1,0 +1,129 @@
+# This is a basic workflow to help you get started with Actions
+
+name: godot-ci
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+env:
+  GODOT_VERSION: 4.4.1
+  EXPORT_NAME: SpagistanArtyComputer
+  PROJECT_PATH: ./
+
+
+jobs:
+  # export-windows:
+  #   name: Windows Export
+  #   runs-on: ubuntu-20.04
+  #   container:
+  #     image: barichello/godot-ci:4.3
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         lfs: true
+  #     - name: Setup
+  #       run: |
+  #         mkdir -v -p ~/.local/share/godot/export_templates/
+  #         mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+  #     - name: Windows Build
+  #       run: |
+  #         mkdir -v -p build/windows
+  #         cd $PROJECT_PATH
+  #         godot --headless --verbose --export-release "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: windows
+  #         path: build/windows
+
+  # export-linux:
+  #   name: Linux Export
+  #   runs-on: ubuntu-20.04
+  #   container:
+  #     image: barichello/godot-ci:4.3
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         lfs: true
+  #     - name: Setup
+  #       run: |
+  #         mkdir -v -p ~/.local/share/godot/export_templates/
+  #         mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+  #     - name: Linux Build
+  #       run: |
+  #         mkdir -v -p build/linux
+  #         cd $PROJECT_PATH
+  #         godot --headless --verbose --export-release "Linux/X11" ../build/linux/$EXPORT_NAME.x86_64
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: linux
+  #         path: build/linux
+
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-24.04
+    container:
+      image: barichello/godot-ci:4.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "HTML5" build/web/index.html
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: build/web
+      - name: deploy to itch.io dev (HTML5)
+        uses: manleydev/butler-publish-itchio-action@master
+        env:
+            BUTLER_CREDENTIALS: ${{ secrets.ITCH_KEY }}
+            CHANNEL: html
+            ITCH_GAME: spag-arty
+            ITCH_USER: cparadis777
+            PACKAGE: build/web
+            VERSION: ${{ steps.download-html.outputs.version }}
+
+# export-mac:
+  #   name: Mac Export
+  #   runs-on: ubuntu-20.04
+  #   container:
+  #     image: barichello/godot-ci:4.3
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         lfs: true
+  #     - name: Setup
+  #       run: |
+  #         mkdir -v -p ~/.local/share/godot/export_templates/
+  #         mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+  #     - name: Mac Build
+  #       run: |
+  #         mkdir -v -p build/mac
+  #         cd $PROJECT_PATH
+  #         godot --headless --verbose --export-release "Mac OSX" ../build/mac/$EXPORT_NAME.zip
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: mac
+  #         path: build/mac
