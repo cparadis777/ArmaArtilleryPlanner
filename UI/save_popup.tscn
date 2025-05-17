@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtn16urdee6cb"]
+
+[ext_resource type="Script" uid="uid://bf80534subaup" path="res://UI/save_popup.gd" id="1_qqs34"]
+
+[node name="SavePopup" type="Popup"]
+title = "Save Mission"
+initial_position = 1
+size = Vector2i(400, 200)
+visible = true
+script = ExtResource("1_qqs34")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(400, 200)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "MISSION NAME"
+horizontal_alignment = 1
+
+[node name="Name" type="LineEdit" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+max_length = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Save" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="Cancel" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/Save" to="." method="save"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/Cancel" to="." method="close"]

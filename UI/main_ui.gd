@@ -1,11 +1,14 @@
 extends Control
 
 
+@export var SavePopUp: PackedScene
+
 @export var pieces: Array[ArtilleryPiece]
 
 
 var active_piece: ArtilleryPiece: set = set_active_piece
 var active_shell: ArtilleryShell
+
 
 func _ready() -> void:
 	%PieceSelect.clear()
@@ -63,3 +66,19 @@ func get_solutions() -> void:
 		solutions.append(solution)
 
 	%SolutionsTable.load_solutions(solutions)
+
+
+func save_mission() -> void:
+	var popup = self.SavePopUp.instantiate()
+	self.add_child(popup)
+	popup.create_mission.connect(self.create_mission)
+	popup.popup()
+
+func create_mission(name: String) -> void:
+	var mission = Mission.new()
+	mission.name = name
+	mission.distance = int(%Distance.text)
+	mission.elevation = int(%Elevation.text)
+	mission.solutions = %SolutionsTable.current_solutions
+
+	%MissionsTable.add_mission(mission)

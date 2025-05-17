@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd5cttckxufit"]
+
+[ext_resource type="Script" uid="uid://c4fr1kteew6t5" path="res://UI/mission_row.gd" id="1_g4clh"]
+
+[node name="MissionRow" type="HBoxContainer"]
+script = ExtResource("1_g4clh")
+
+[node name="Name" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Distance" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Elevation" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2

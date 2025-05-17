@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cd1idgc6v1tt5"]
+[gd_scene load_steps=10 format=3 uid="uid://cd1idgc6v1tt5"]
 
 [ext_resource type="Script" uid="uid://bbvn28ua630ru" path="res://UI/main_ui.gd" id="1_18al3"]
 [ext_resource type="Script" uid="uid://cmc6iqqnpi0r5" path="res://Script/resources/artillery_piece.gd" id="2_1mss6"]
+[ext_resource type="PackedScene" uid="uid://dtn16urdee6cb" path="res://UI/save_popup.tscn" id="2_8occa"]
 [ext_resource type="Resource" uid="uid://c0g70o45nje2c" path="res://Resources/pieces/2S3M1.tres" id="3_3mgtp"]
 [ext_resource type="PackedScene" uid="uid://ka5ai8xh4g83" path="res://UI/SolutionRow.tscn" id="4_3chno"]
 [ext_resource type="Script" uid="uid://cd6bpada0jmiy" path="res://UI/solutions_table.gd" id="4_g6vbv"]
 [ext_resource type="Theme" uid="uid://dqk16k73qpqe2" path="res://Resources/MainTheme.tres" id="4_pdhop"]
 [ext_resource type="PackedScene" uid="uid://d3qlum2yt1ahk" path="res://UI/Target.tscn" id="6_i5dfn"]
+[ext_resource type="Script" uid="uid://codr5gdtu2yvg" path="res://UI/missions_table.gd" id="9_gjj8c"]
 
 [node name="MainUi" type="Control"]
 layout_mode = 3
@@ -16,6 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_18al3")
+SavePopUp = ExtResource("2_8occa")
 pieces = Array[ExtResource("2_1mss6")]([ExtResource("3_3mgtp")])
 metadata/_edit_lock_ = true
 
@@ -132,10 +135,22 @@ layout_mode = 2
 text = "0"
 alignment = 1
 
-[node name="Button" type="Button" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Button" type="Button" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Calculate"
+
+[node name="SaveButton" type="Button" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Save"
 
 [node name="HSeparator" type="HSeparator" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2"]
 layout_mode = 2
@@ -185,13 +200,27 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 metadata/_edit_lock_ = true
 
+[node name="MISSIONS" type="MarginContainer" parent="Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/MISSIONS"]
+layout_mode = 2
+alignment = 1
+
+[node name="MissionsTable" type="VBoxContainer" parent="Panel/TabContainer/MISSIONS/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("9_gjj8c")
+
 [node name="BATTERY" type="MarginContainer" parent="Panel/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/BATTERY"]
 layout_mode = 2
@@ -254,7 +283,8 @@ alignment = 1
 max_length = 5
 emoji_menu_enabled = false
 
-[connection signal="pressed" from="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/Button" to="." method="_on_calculate_pressed"]
+[connection signal="pressed" from="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer/Button" to="." method="_on_calculate_pressed"]
+[connection signal="pressed" from="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer/SaveButton" to="." method="save_mission"]
 [connection signal="item_selected" from="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer/PieceSelect" to="." method="_on_piece_select_item_selected"]
 [connection signal="item_selected" from="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer/AmmoSelect" to="." method="_on_ammo_select_item_selected"]
 
