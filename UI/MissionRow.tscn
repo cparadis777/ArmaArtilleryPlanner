@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://cd5cttckxufit"]
+[gd_scene load_steps=3 format=3 uid="uid://cd5cttckxufit"]
 
 [ext_resource type="Script" uid="uid://c4fr1kteew6t5" path="res://UI/mission_row.gd" id="1_g4clh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4clh"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.862745, 0.0117647, 0.0117647, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="MissionRow" type="HBoxContainer"]
 script = ExtResource("1_g4clh")
@@ -33,6 +45,7 @@ text = "LOAD"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_g4clh")
 text = "DELETE"
 
 [connection signal="pressed" from="SelectButton" to="." method="_on_select_button_pressed"]
