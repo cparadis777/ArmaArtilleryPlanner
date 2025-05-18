@@ -48,10 +48,10 @@ func _on_calculate_pressed() -> void:
 
 func get_solutions() -> void:
 	var solutions = []
-	var distance = int(%Distance.text) + %Target.current_ot_adjustment #
+	var distance = int(%Distance.text) + int(%ot_adj.text) #
 	var elevation = int(%Elevation.text) - int(%BATTELEV.text)
 
-	var result = Arty.caculate_lr_shift(distance, %Target.current_lr_adjustment)
+	var result = Arty.caculate_lr_shift(distance, int(%lr_adj.text))
 	distance = result[0]
 	var azimuth = result[1]
 
