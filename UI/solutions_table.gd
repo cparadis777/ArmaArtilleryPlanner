@@ -2,6 +2,7 @@ extends VBoxContainer
 
 const SolutionRowScene: PackedScene = preload("res://UI/SolutionRow.tscn")
 
+
 var current_solutions: Array
 
 func clear() -> void:

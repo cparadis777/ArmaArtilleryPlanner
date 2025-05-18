@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://cd6bpada0jmiy" path="res://UI/solutions_table.gd" id="4_g6vbv"]
 [ext_resource type="Theme" uid="uid://dqk16k73qpqe2" path="res://Resources/MainTheme.tres" id="4_pdhop"]
 [ext_resource type="PackedScene" uid="uid://d3qlum2yt1ahk" path="res://UI/Target.tscn" id="6_i5dfn"]
-[ext_resource type="Script" uid="uid://codr5gdtu2yvg" path="res://UI/missions_table.gd" id="9_gjj8c"]
+[ext_resource type="PackedScene" uid="uid://dgxag3fgqemli" path="res://UI/MissionBank.tscn" id="9_gjj8c"]
 
 [node name="MainUi" type="Control"]
 layout_mode = 3
@@ -42,10 +42,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_pdhop")
 theme_override_font_sizes/font_size = 32
-current_tab = 1
+current_tab = 0
 
 [node name="MAIN" type="MarginContainer" parent="Panel/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -201,17 +200,13 @@ size_flags_vertical = 4
 metadata/_edit_lock_ = true
 
 [node name="MISSIONS" type="MarginContainer" parent="Panel/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/MISSIONS"]
-layout_mode = 2
-alignment = 1
-
-[node name="MissionsTable" type="VBoxContainer" parent="Panel/TabContainer/MISSIONS/HBoxContainer"]
+[node name="MissionBank" parent="Panel/TabContainer/MISSIONS" instance=ExtResource("9_gjj8c")]
 unique_name_in_owner = true
 layout_mode = 2
-script = ExtResource("9_gjj8c")
 
 [node name="BATTERY" type="MarginContainer" parent="Panel/TabContainer"]
 visible = false
@@ -285,6 +280,7 @@ emoji_menu_enabled = false
 
 [connection signal="pressed" from="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer/Button" to="." method="_on_calculate_pressed"]
 [connection signal="pressed" from="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer/SaveButton" to="." method="save_mission"]
+[connection signal="mission_selected" from="Panel/TabContainer/MISSIONS/MissionBank" to="." method="_on_mission_bank_mission_selected"]
 [connection signal="item_selected" from="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer/PieceSelect" to="." method="_on_piece_select_item_selected"]
 [connection signal="item_selected" from="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer/AmmoSelect" to="." method="_on_ammo_select_item_selected"]
 
