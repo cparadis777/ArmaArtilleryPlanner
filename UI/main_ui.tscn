@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cd1idgc6v1tt5"]
+[gd_scene load_steps=10 format=3 uid="uid://cd1idgc6v1tt5"]
 
 [ext_resource type="Script" uid="uid://bbvn28ua630ru" path="res://UI/main_ui.gd" id="1_18al3"]
 [ext_resource type="Script" uid="uid://cmc6iqqnpi0r5" path="res://Script/resources/artillery_piece.gd" id="2_1mss6"]
+[ext_resource type="PackedScene" uid="uid://dtn16urdee6cb" path="res://UI/save_popup.tscn" id="2_8occa"]
 [ext_resource type="Resource" uid="uid://c0g70o45nje2c" path="res://Resources/pieces/2S3M1.tres" id="3_3mgtp"]
 [ext_resource type="PackedScene" uid="uid://ka5ai8xh4g83" path="res://UI/SolutionRow.tscn" id="4_3chno"]
 [ext_resource type="Script" uid="uid://cd6bpada0jmiy" path="res://UI/solutions_table.gd" id="4_g6vbv"]
 [ext_resource type="Theme" uid="uid://dqk16k73qpqe2" path="res://Resources/MainTheme.tres" id="4_pdhop"]
 [ext_resource type="PackedScene" uid="uid://d3qlum2yt1ahk" path="res://UI/Target.tscn" id="6_i5dfn"]
+[ext_resource type="PackedScene" uid="uid://dgxag3fgqemli" path="res://UI/MissionBank.tscn" id="9_gjj8c"]
 
 [node name="MainUi" type="Control"]
 layout_mode = 3
@@ -16,6 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_18al3")
+SavePopUp = ExtResource("2_8occa")
 pieces = Array[ExtResource("2_1mss6")]([ExtResource("3_3mgtp")])
 metadata/_edit_lock_ = true
 
@@ -30,33 +33,36 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="TabContainer" type="TabContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
 theme = ExtResource("4_pdhop")
 theme_override_font_sizes/font_size = 32
-current_tab = 1
+current_tab = 0
 
-[node name="MAIN" type="MarginContainer" parent="Panel/TabContainer"]
-visible = false
+[node name="MAIN" type="MarginContainer" parent="Panel/MarginContainer/TabContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 0
 metadata/_tab_index = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/MAIN"]
-clip_contents = true
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN"]
 layout_mode = 2
 alignment = 1
 
-[node name="LeftSide" type="Panel" parent="Panel/TabContainer/MAIN/HBoxContainer"]
+[node name="LeftSide" type="Panel" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer"]
 z_index = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,174 +70,185 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 8
-alignment = 2
+alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 text = "Distance"
+horizontal_alignment = 1
 
-[node name="Distance" type="LineEdit" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Distance" type="LineEdit" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "3000"
 alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(25, 35)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
+alignment = 1
 
-[node name="Label" type="Label" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 text = "Elevation"
+horizontal_alignment = 1
 
-[node name="Elevation" type="LineEdit" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Elevation" type="LineEdit" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "0"
 alignment = 1
 
-[node name="Button" type="Button" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Calculate"
 
-[node name="HSeparator" type="HSeparator" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2"]
+[node name="SaveButton" type="Button" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Save"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/MarginContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SolutionRow" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer2" instance=ExtResource("4_3chno")]
+[node name="SolutionRow" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer3" instance=ExtResource("4_3chno")]
 layout_mode = 2
 
-[node name="Type" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer2/SolutionRow" index="0"]
+[node name="Type" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer3/SolutionRow" index="0"]
 text = "Type"
 
-[node name="Charge" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer2/SolutionRow" index="1"]
+[node name="Charge" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer3/SolutionRow" index="1"]
 text = "Charge"
 
-[node name="Elevation" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer2/SolutionRow" index="2"]
+[node name="Elevation" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer3/SolutionRow" index="2"]
 text = "Elevation"
 
-[node name="ToF" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer2/SolutionRow" index="3"]
+[node name="ToF" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer3/SolutionRow" index="3"]
 text = "ToF"
 
-[node name="dAz" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer2/SolutionRow" index="4"]
+[node name="dAz" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer3/SolutionRow" index="4"]
 text = "dAZ"
 
-[node name="HSeparator" type="HSeparator" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer3"]
 layout_mode = 2
 
-[node name="SolutionsTable" type="VBoxContainer" parent="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer2"]
+[node name="SolutionsTable" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("4_g6vbv")
 
-[node name="Target" parent="Panel/TabContainer/MAIN/HBoxContainer" instance=ExtResource("6_i5dfn")]
+[node name="Target" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer" instance=ExtResource("6_i5dfn")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 metadata/_edit_lock_ = true
 
-[node name="BATTERY" type="MarginContainer" parent="Panel/TabContainer"]
+[node name="MISSIONS" type="MarginContainer" parent="Panel/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MissionBank" parent="Panel/MarginContainer/TabContainer/MISSIONS" instance=ExtResource("9_gjj8c")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BATTERY" type="MarginContainer" parent="Panel/MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/TabContainer/BATTERY"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/BATTERY"]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/BATTERY/HBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="Label" type="Label" parent="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Artillery Piece"
 horizontal_alignment = 1
 
-[node name="PieceSelect" type="OptionButton" parent="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer"]
+[node name="PieceSelect" type="OptionButton" parent="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 alignment = 1
 
-[node name="Label2" type="Label" parent="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer"]
+[node name="Label2" type="Label" parent="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Ammunition"
 horizontal_alignment = 1
 
-[node name="AmmoSelect" type="OptionButton" parent="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer"]
+[node name="AmmoSelect" type="OptionButton" parent="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 alignment = 1
 
-[node name="Label3" type="Label" parent="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer"]
+[node name="Label3" type="Label" parent="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer"]
 layout_mode = 2
 text = "BATTERY GRID"
 horizontal_alignment = 1
 
-[node name="BATTGRID" type="LineEdit" parent="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer"]
+[node name="BATTGRID" type="LineEdit" parent="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -240,12 +257,12 @@ alignment = 1
 max_length = 8
 emoji_menu_enabled = false
 
-[node name="Label4" type="Label" parent="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer"]
+[node name="Label4" type="Label" parent="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Elevation"
 horizontal_alignment = 1
 
-[node name="BATTELEV" type="LineEdit" parent="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer"]
+[node name="BATTELEV" type="LineEdit" parent="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -254,8 +271,10 @@ alignment = 1
 max_length = 5
 emoji_menu_enabled = false
 
-[connection signal="pressed" from="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/VBoxContainer/Button" to="." method="_on_calculate_pressed"]
-[connection signal="item_selected" from="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer/PieceSelect" to="." method="_on_piece_select_item_selected"]
-[connection signal="item_selected" from="Panel/TabContainer/BATTERY/HBoxContainer/GridContainer/AmmoSelect" to="." method="_on_ammo_select_item_selected"]
+[connection signal="pressed" from="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer/Button" to="." method="_on_calculate_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer/SaveButton" to="." method="save_mission"]
+[connection signal="mission_selected" from="Panel/MarginContainer/TabContainer/MISSIONS/MissionBank" to="." method="_on_mission_bank_mission_selected"]
+[connection signal="item_selected" from="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer/PieceSelect" to="." method="_on_piece_select_item_selected"]
+[connection signal="item_selected" from="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer/AmmoSelect" to="." method="_on_ammo_select_item_selected"]
 
-[editable path="Panel/TabContainer/MAIN/HBoxContainer/LeftSide/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer2/SolutionRow"]
+[editable path="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer3/SolutionRow"]

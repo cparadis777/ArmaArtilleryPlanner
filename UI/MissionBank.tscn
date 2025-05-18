@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgxag3fgqemli"]
+
+[ext_resource type="Script" uid="uid://codr5gdtu2yvg" path="res://UI/missions_table.gd" id="1_ebw7p"]
+[ext_resource type="Script" uid="uid://q3yayjcpcd4v" path="res://UI/mission_bank.gd" id="1_ivsfc"]
+[ext_resource type="Script" uid="uid://cd6bpada0jmiy" path="res://UI/solutions_table.gd" id="2_jnkk0"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+alignment = 1
+script = ExtResource("1_ivsfc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="MissionTableHeader" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MissionTableHeader"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/MissionTableHeader"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Distance"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/MissionTableHeader"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Elevation"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer/MissionTableHeader"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="VBoxContainer/MissionTableHeader"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MissionsTable" type="VBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 2
+alignment = 1
+script = ExtResource("1_ebw7p")
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="SolutionHeader" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Type" type="Label" parent="VBoxContainer2/SolutionHeader"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Type"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Charge" type="Label" parent="VBoxContainer2/SolutionHeader"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Charge"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Elevation" type="Label" parent="VBoxContainer2/SolutionHeader"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Elevation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToF" type="Label" parent="VBoxContainer2/SolutionHeader"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "ToF"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="dAz" type="Label" parent="VBoxContainer2/SolutionHeader"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "dAZ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="SolutionsTable" type="VBoxContainer" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 2
+alignment = 1
+script = ExtResource("2_jnkk0")
