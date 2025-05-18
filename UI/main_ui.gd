@@ -10,6 +10,10 @@ var active_piece: ArtilleryPiece: set = set_active_piece
 var active_shell: ArtilleryShell
 
 
+var current_battery_position: Vector2 = Vector2(0, 0)
+var current_fo_position: Vector2 = Vector2(0, 0)
+var fo_vector: int = 0
+
 func _ready() -> void:
 	%PieceSelect.clear()
 	for piece in self.pieces:
@@ -48,11 +52,21 @@ func _on_calculate_pressed() -> void:
 
 func get_solutions() -> void:
 	var solutions = []
-	var distance = int(%Distance.text) + int(%ot_adj.text) #
-	var elevation = int(%Elevation.text) - int(%BATTELEV.text)
 
-	var result = Arty.caculate_lr_shift(distance, int(%lr_adj.text))
-	distance = result[0]
+	#var distance = int(%Distance.text) + int(%ot_adj.text) #
+	var target = Arty.parse_grid(%Distance.text)
+	
+	var fo_adjustments = Vector2(-int(%ot_adj.text), -int(%lr_adj.text))
+	
+	var battery_adjustments = fo_adjustments.rotated(deg_to_rad(-1 * self.fo_vector))
+	var elevation = int(%Elevation.text) - battery_adjustments.y
+
+	target += battery_adjustments
+	var distance = target.distance_to(self.current_battery_position)
+
+
+	var result = Arty.caculate_lr_shift(distance, fo_adjustments.x)
+	##distance = result[0]
 	var azimuth = result[1]
 
 
@@ -99,3 +113,28 @@ func load_mission(mission: Mission) -> void:
 
 func _on_mission_bank_mission_selected(mission: Mission) -> void:
 	self.load_mission(mission)
+
+func _on_fo_vector_text_changed(text: String) -> void:
+	if text.is_valid_int():
+		%Target.update_vector(int(text))
+		self.fo_vector = int(text)
+
+func _on_ot_adj_text_changed(text: String) -> void:
+	if text.is_valid_int():
+		%Target.current_ot_adjustment = int(text)
+		%Target.update_target()
+
+func _on_lr_adj_text_changed(text: String) -> void:
+	if text.is_valid_int():
+		%Target.current_lr_adjustment = int(text)
+		%Target.update_target()
+
+
+func _on_battgrid_text_changed(new_text: String) -> void:
+	self.current_battery_position = Arty.parse_grid(new_text)
+	print(self.current_battery_position)
+
+
+func _on_fo_grid_text_changed(new_text: String) -> void:
+	self.current_fo_position = Arty.parse_grid(new_text)
+	print(self.current_fo_position)

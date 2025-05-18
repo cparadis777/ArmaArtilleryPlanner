@@ -45,9 +45,10 @@ grow_vertical = 2
 layout_mode = 2
 theme = ExtResource("4_pdhop")
 theme_override_font_sizes/font_size = 32
-current_tab = 0
+current_tab = 2
 
 [node name="MAIN" type="MarginContainer" parent="Panel/MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
@@ -92,10 +93,11 @@ horizontal_alignment = 1
 
 [node name="Distance" type="LineEdit" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer3/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(75, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "3000"
+text = "01110111"
 alignment = 1
+max_length = 8
 
 [node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
@@ -114,7 +116,7 @@ horizontal_alignment = 1
 
 [node name="Elevation" type="LineEdit" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer3/HBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(75, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "0"
 alignment = 1
@@ -136,7 +138,7 @@ horizontal_alignment = 1
 
 [node name="ot_adj" type="LineEdit" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer2/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(75, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "0"
 alignment = 1
@@ -151,12 +153,13 @@ alignment = 1
 
 [node name="Label2" type="Label" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer2/HBoxContainer2"]
 layout_mode = 2
-size_flags_horizontal = 6
-text = "L/R Adjusment"
+size_flags_horizontal = 3
+text = "L/R Adjustment"
+horizontal_alignment = 1
 
 [node name="lr_adj" type="LineEdit" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer2/HBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(75, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 text = "0"
@@ -213,7 +216,56 @@ layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("4_g6vbv")
 
-[node name="Target" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer" instance=ExtResource("6_i5dfn")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "FO DATA"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "GRID"
+horizontal_alignment = 1
+
+[node name="FOGrid" type="LineEdit" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "000000"
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Vector"
+horizontal_alignment = 1
+
+[node name="FOVector" type="LineEdit" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "0"
+alignment = 1
+
+[node name="Target" parent="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer" instance=ExtResource("6_i5dfn")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
@@ -230,7 +282,6 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="BATTERY" type="MarginContainer" parent="Panel/MarginContainer/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -282,7 +333,7 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "00000000"
 alignment = 1
-max_length = 8
+max_length = 10
 emoji_menu_enabled = false
 
 [node name="Label4" type="Label" parent="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer"]
@@ -299,10 +350,15 @@ alignment = 1
 max_length = 5
 emoji_menu_enabled = false
 
+[connection signal="text_changed" from="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer2/HBoxContainer/ot_adj" to="." method="_on_ot_adj_text_changed"]
+[connection signal="text_changed" from="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer2/HBoxContainer2/lr_adj" to="." method="_on_lr_adj_text_changed"]
 [connection signal="pressed" from="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer/Button" to="." method="_on_calculate_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer/HBoxContainer/SaveButton" to="." method="save_mission"]
+[connection signal="text_changed" from="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/FOGrid" to="." method="_on_fo_grid_text_changed"]
+[connection signal="text_changed" from="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/FOVector" to="." method="_on_fo_vector_text_changed"]
 [connection signal="mission_selected" from="Panel/MarginContainer/TabContainer/MISSIONS/MissionBank" to="." method="_on_mission_bank_mission_selected"]
 [connection signal="item_selected" from="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer/PieceSelect" to="." method="_on_piece_select_item_selected"]
 [connection signal="item_selected" from="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer/AmmoSelect" to="." method="_on_ammo_select_item_selected"]
+[connection signal="text_changed" from="Panel/MarginContainer/TabContainer/BATTERY/HBoxContainer/GridContainer/BATTGRID" to="." method="_on_battgrid_text_changed"]
 
 [editable path="Panel/MarginContainer/TabContainer/MAIN/HBoxContainer/LeftSide/VBoxContainer2/VBoxContainer3/SolutionRow"]

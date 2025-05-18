@@ -6,23 +6,12 @@
 
 [node name="Target" type="MarginContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(460, 400)
-offset_right = 420.0
-offset_bottom = 360.0
+custom_minimum_size = Vector2(360, 360)
+offset_right = 200.0
+offset_bottom = 200.0
 script = ExtResource("1_vvqqt")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Background" type="PanelContainer" parent="MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="screen" type="Polygon2D" parent="MarginContainer/Background"]
+[node name="screen" type="Polygon2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(180, 180)
 color = Color(1, 1, 1, 0)
@@ -30,49 +19,49 @@ polygon = PackedVector2Array(180, 0, 179.645, 11.3023, 178.581, 22.56, 176.812, 
 script = ExtResource("1_6h6tk")
 radius = 180.0
 
-[node name="Polygon2D" type="Polygon2D" parent="MarginContainer/Background/screen"]
+[node name="Polygon2D" type="Polygon2D" parent="screen"]
 clip_children = 1
 polygon = PackedVector2Array(180, 0, 179.645, 11.3023, 178.581, 22.56, 176.812, 33.7286, 174.345, 44.7642, 171.19, 55.6231, 167.36, 66.2624, 162.869, 76.6403, 157.735, 86.7157, 151.979, 96.4488, 145.623, 105.801, 138.692, 114.736, 131.214, 123.218, 123.218, 131.214, 114.736, 138.692, 105.801, 145.623, 96.4488, 151.979, 86.7157, 157.735, 76.6403, 162.869, 66.2624, 167.36, 55.6231, 171.19, 44.7642, 174.345, 33.7286, 176.812, 22.56, 178.581, 11.3023, 179.645, 1.10215e-14, 180, -11.3023, 179.645, -22.56, 178.581, -33.7286, 176.812, -44.7642, 174.345, -55.6231, 171.19, -66.2624, 167.36, -76.6403, 162.869, -86.7157, 157.735, -96.4488, 151.979, -105.801, 145.623, -114.736, 138.692, -123.218, 131.214, -131.214, 123.218, -138.692, 114.736, -145.623, 105.801, -151.979, 96.4488, -157.735, 86.7157, -162.869, 76.6403, -167.36, 66.2624, -171.19, 55.6231, -174.345, 44.7642, -176.812, 33.7286, -178.581, 22.56, -179.645, 11.3023, -180, 2.20429e-14, -179.645, -11.3023, -178.581, -22.56, -176.812, -33.7286, -174.345, -44.7642, -171.19, -55.6231, -167.36, -66.2624, -162.869, -76.6403, -157.735, -86.7157, -151.979, -96.4488, -145.623, -105.801, -138.692, -114.736, -131.214, -123.218, -123.218, -131.214, -114.736, -138.692, -105.801, -145.623, -96.4488, -151.979, -86.7157, -157.735, -76.6403, -162.869, -66.2624, -167.36, -55.6231, -171.19, -44.7642, -174.345, -33.7286, -176.812, -22.56, -178.581, -11.3023, -179.645, -3.30644e-14, -180, 11.3023, -179.645, 22.56, -178.581, 33.7286, -176.812, 44.7642, -174.345, 55.6231, -171.19, 66.2624, -167.36, 76.6403, -162.869, 86.7157, -157.735, 96.4488, -151.979, 105.801, -145.623, 114.736, -138.692, 123.218, -131.214, 131.214, -123.218, 138.692, -114.736, 145.623, -105.801, 151.979, -96.4488, 157.735, -86.7157, 162.869, -76.6403, 167.36, -66.2624, 171.19, -55.6231, 174.345, -44.7642, 176.812, -33.7286, 178.581, -22.56, 179.645, -11.3023)
 script = ExtResource("1_6h6tk")
 radius = 180.0
 
-[node name="Polygon2D3" type="Polygon2D" parent="MarginContainer/Background/screen/Polygon2D"]
+[node name="Polygon2D3" type="Polygon2D" parent="screen/Polygon2D"]
 modulate = Color(0.254902, 1, 0, 1)
 color = Color(0.254902, 1, 0, 0.0941176)
 polygon = PackedVector2Array(180, 0, 179.645, 11.3023, 178.581, 22.56, 176.812, 33.7286, 174.345, 44.7642, 171.19, 55.6231, 167.36, 66.2624, 162.869, 76.6403, 157.735, 86.7157, 151.979, 96.4488, 145.623, 105.801, 138.692, 114.736, 131.214, 123.218, 123.218, 131.214, 114.736, 138.692, 105.801, 145.623, 96.4488, 151.979, 86.7157, 157.735, 76.6403, 162.869, 66.2624, 167.36, 55.6231, 171.19, 44.7642, 174.345, 33.7286, 176.812, 22.56, 178.581, 11.3023, 179.645, 1.10215e-14, 180, -11.3023, 179.645, -22.56, 178.581, -33.7286, 176.812, -44.7642, 174.345, -55.6231, 171.19, -66.2624, 167.36, -76.6403, 162.869, -86.7157, 157.735, -96.4488, 151.979, -105.801, 145.623, -114.736, 138.692, -123.218, 131.214, -131.214, 123.218, -138.692, 114.736, -145.623, 105.801, -151.979, 96.4488, -157.735, 86.7157, -162.869, 76.6403, -167.36, 66.2624, -171.19, 55.6231, -174.345, 44.7642, -176.812, 33.7286, -178.581, 22.56, -179.645, 11.3023, -180, 2.20429e-14, -179.645, -11.3023, -178.581, -22.56, -176.812, -33.7286, -174.345, -44.7642, -171.19, -55.6231, -167.36, -66.2624, -162.869, -76.6403, -157.735, -86.7157, -151.979, -96.4488, -145.623, -105.801, -138.692, -114.736, -131.214, -123.218, -123.218, -131.214, -114.736, -138.692, -105.801, -145.623, -96.4488, -151.979, -86.7157, -157.735, -76.6403, -162.869, -66.2624, -167.36, -55.6231, -171.19, -44.7642, -174.345, -33.7286, -176.812, -22.56, -178.581, -11.3023, -179.645, -3.30644e-14, -180, 11.3023, -179.645, 22.56, -178.581, 33.7286, -176.812, 44.7642, -174.345, 55.6231, -171.19, 66.2624, -167.36, 76.6403, -162.869, 86.7157, -157.735, 96.4488, -151.979, 105.801, -145.623, 114.736, -138.692, 123.218, -131.214, 131.214, -123.218, 138.692, -114.736, 145.623, -105.801, 151.979, -96.4488, 157.735, -86.7157, 162.869, -76.6403, 167.36, -66.2624, 171.19, -55.6231, 174.345, -44.7642, 176.812, -33.7286, 178.581, -22.56, 179.645, -11.3023)
 script = ExtResource("1_6h6tk")
 radius = 180.0
 
-[node name="Line2D4" type="Line2D" parent="MarginContainer/Background/screen/Polygon2D"]
+[node name="Line2D4" type="Line2D" parent="screen/Polygon2D"]
 points = PackedVector2Array(-200, 200, 200, -200)
 width = 1.0
 default_color = Color(0.254902, 1, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="Line2D3" type="Line2D" parent="MarginContainer/Background/screen/Polygon2D"]
+[node name="Line2D3" type="Line2D" parent="screen/Polygon2D"]
 points = PackedVector2Array(-200, -200, 200, 200)
 width = 1.0
 default_color = Color(0.254902, 1, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="Line2D2" type="Line2D" parent="MarginContainer/Background/screen/Polygon2D"]
+[node name="Line2D2" type="Line2D" parent="screen/Polygon2D"]
 points = PackedVector2Array(-200, 0, 200, 0)
 width = 1.0
 default_color = Color(0.254902, 1, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="Line2D" type="Line2D" parent="MarginContainer/Background/screen/Polygon2D"]
+[node name="Line2D" type="Line2D" parent="screen/Polygon2D"]
 points = PackedVector2Array(0, -200, 0, 200)
 width = 1.0
 default_color = Color(0.254902, 1, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="Reticle" parent="MarginContainer/Background/screen" instance=ExtResource("3_1uxxo")]
+[node name="Reticle" parent="screen" instance=ExtResource("3_1uxxo")]
 unique_name_in_owner = true
 z_index = 2
 scale = Vector2(2, 2)
 
-[node name="Polygon2D2" type="Polygon2D" parent="MarginContainer/Background"]
+[node name="Polygon2D2" type="Polygon2D" parent="."]
 clip_children = 2
 position = Vector2(180, 180)
 color = Color(0.10748, 0.10748, 0.10748, 1)
@@ -81,37 +70,8 @@ polygon = PackedVector2Array(180, 0, 179.645, 11.3023, 178.581, 22.56, 176.812, 
 script = ExtResource("1_6h6tk")
 radius = 180.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-text = "OT"
-horizontal_alignment = 2
-
-[node name="OTAdj" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="FOLine" type="Line2D" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
-text = "0"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-text = "L/R"
-horizontal_alignment = 2
-
-[node name="LRAdj" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "0"
-
-[connection signal="text_changed" from="MarginContainer/VBoxContainer/HBoxContainer/OTAdj" to="." method="_on_adj_text_changed"]
-[connection signal="text_changed" from="MarginContainer/VBoxContainer/HBoxContainer2/LRAdj" to="." method="_on_adj_text_changed"]
+position = Vector2(180, 180)
+points = PackedVector2Array(0, -180, 0, 180)
+width = 1.0
