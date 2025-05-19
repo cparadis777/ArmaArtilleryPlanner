@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtn16urdee6cb"]
+[gd_scene load_steps=6 format=3 uid="uid://dtn16urdee6cb"]
 
 [ext_resource type="Script" uid="uid://bf80534subaup" path="res://UI/save_popup.gd" id="1_qqs34"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_qqs34"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_cbrps"]
+events = [SubResource("InputEventKey_qqs34")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_j3ldv"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_ym2bd"]
+events = [SubResource("InputEventKey_j3ldv")]
 
 [node name="SavePopup" type="Popup"]
 title = "Save Mission"
@@ -11,8 +25,11 @@ script = ExtResource("1_qqs34")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(400, 200)
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -41,11 +58,13 @@ alignment = 1
 [node name="Save" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+shortcut = SubResource("Shortcut_cbrps")
 text = "Save"
 
 [node name="Cancel" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+shortcut = SubResource("Shortcut_ym2bd")
 text = "Cancel"
 
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/Save" to="." method="save"]
